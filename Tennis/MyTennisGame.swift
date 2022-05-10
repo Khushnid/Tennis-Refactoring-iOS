@@ -45,6 +45,6 @@ extension MyTennisGame {
     }
     
     private func playerScores(_ p1Result: String?, _ p2Result: String?) -> String {
-        return "\(p1Result ?? "Love")-\(p2Result ?? "Love")"
+        "\(p1Result ?? "Love")-\(p2Result ?? "Love")"
     }
 }

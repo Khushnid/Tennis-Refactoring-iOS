@@ -47,18 +47,6 @@ class MyTennisGame: TennisGame {
         }
     }
     
-   private func setP1Score(number: Int) {
-        for _ in 0..<number {
-            P1Score()
-        }
-    }
-
-    private func setP2Score(number: Int) {
-        for _ in 0..<number {
-            P2Score()
-        }
-    }
-    
     private func P1Score() {
         P1point += 1
     }

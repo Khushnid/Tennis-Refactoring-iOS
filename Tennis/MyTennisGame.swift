@@ -13,6 +13,10 @@ class MyTennisGame: TennisGame {
         player2Name = player2
     }
     
+    func wonPoint(_ playerName: String) {
+        playerName == "player1" ? (P1point += 1) : (P2point += 1)
+    }
+    
     var score: String? { getScore(P1point, P2point) }
 }
 
@@ -42,9 +46,5 @@ extension MyTennisGame {
     
     private func playerScores(_ p1Result: String?, _ p2Result: String?) -> String {
         return "\(p1Result ?? "Love")-\(p2Result ?? "Love")"
-    }
-    
-    func wonPoint(_ playerName: String) {
-        playerName == "player1" ? (P1point += 1) : (P2point += 1)
     }
 }

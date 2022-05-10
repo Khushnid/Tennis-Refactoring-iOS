@@ -1,13 +1,11 @@
 import Foundation
-import UIKit
-import XCTest
 
 class MyTennisGame: TennisGame {
     private let player1Name: String
     private let player2Name: String
     private var P1point: Int = 0
-    private var P1res: String = ""
     private var P2point: Int = 0
+    private var P1res: String = ""
     private var P2res: String = ""
     
     required init(player1: String, player2: String) {
@@ -16,36 +14,34 @@ class MyTennisGame: TennisGame {
     }
     
     var score: String? {
-        if P1point >= 4 && (P1point - P2point) >= 2 {
+        if P1point >= 4 && P1point - P2point >= 2 {
             return "Win for player1"
-        } else if P2point >= 4 && (P2point - P1point) >= 2 {
+        } else if P2point >= 4 && P2point - P1point >= 2 {
             return "Win for player2"
-        } else if P1point == P2point && P1point < 3 {
-            return "\(scoreMake(point: P1point))-All"
-        } else if P1point == P2point && P1point > 2 {
-            return "Deuce"
-        } else if P1point > 0 && P2point == 0 {
-            return playerScores(scoreMake(point: P1point))
-        } else if P2point > 0 && P1point == 0 {
-            return playerScores("Love", scoreMake(point: P2point))
-        } else if P1point > P2point && P1point < 4 {
-            return playerScores(scoreMake(point: P1point), scoreMake(point: P2point))
-        } else if P2point>P1point && P2point < 4 {
-            return playerScores(scoreMake(point: P1point), scoreMake(point: P2point))
         } else if P1point > P2point && P2point >= 3 {
             return "Advantage player1"
-        } else {
+        } else if P2point > P1point && P1point >= 3 {
             return "Advantage player2"
+        } else if P1point == P2point && P1point > 2 {
+            return "Deuce"
+        } else if P1point == P2point && P1point < 3 {
+            return "\(scoreMake(point: P1point))-All"
+        } else if P1point > 0 && P2point == 0 {
+            return playerScores(scoreMake(point: P1point), nil)
+        } else if P2point > 0 && P1point == 0 {
+            return playerScores(nil, scoreMake(point: P2point))
+        } else if P1point > P2point && P1point < 4 {
+            return playerScores(scoreMake(point: P1point), scoreMake(point: P2point))
+        } else {
+            return playerScores(scoreMake(point: P1point), scoreMake(point: P2point))
         }
     }
 }
 
-// MARK: - Helpers
 extension MyTennisGame {
     func wonPoint(_ playerName: String) {
         func P1Score() { P1point += 1 }
         func P2Score() { P2point += 1 }
-        
         playerName == "player1" ? P1Score() : P2Score()
     }
     
@@ -58,7 +54,7 @@ extension MyTennisGame {
         }
     }
     
-    private func playerScores(_ p1Result: String = "Love",  _ p2Result: String = "Love") -> String {
-        return "\(p1Result)-\(p2Result)"
+    private func playerScores(_ p1Result: String?, _ p2Result: String?) -> String {
+        return "\(p1Result ?? "Love")-\(p2Result ?? "Love")"
     }
 }

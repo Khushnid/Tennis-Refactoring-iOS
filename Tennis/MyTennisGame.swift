@@ -83,23 +83,18 @@ class MyTennisGame: TennisGame {
         for _ in 0..<number {
             P2Score()
         }
-        
     }
     
     private func P1Score() {
-        P1point+=1
+        P1point += 1
     }
     
     private func P2Score() {
-        P2point+=1
+        P2point += 1
     }
     
     func wonPoint(_ playerName: String) {
-        if playerName == "player1" {
-            P1Score()
-        } else {
-            P2Score()
-        }
+        playerName == "player1" ? P1Score() : P2Score()
     }
 }
 

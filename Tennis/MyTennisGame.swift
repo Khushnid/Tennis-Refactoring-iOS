@@ -46,25 +46,22 @@ class MyTennisGame: TennisGame {
             return "Advantage player2"
         }
     }
-    
-   
-    
+}
+
+extension MyTennisGame {
     func wonPoint(_ playerName: String) {
         func P1Score() { P1point += 1 }
         func P2Score() { P2point += 1 }
         
         playerName == "player1" ? P1Score() : P2Score()
     }
-}
-
-// MARK: - Helper Methods
-extension MyTennisGame {
+    
     private func scoreMake(point: Int) -> String {
         switch point {
-        case 0: return "Love"
-        case 1: return "Fifteen"
-        case 2: return "Thirty"
-        default: return "Forty"
+            case 0: return "Love"
+            case 1: return "Fifteen"
+            case 2: return "Thirty"
+            default: return "Forty"
         }
     }
 }

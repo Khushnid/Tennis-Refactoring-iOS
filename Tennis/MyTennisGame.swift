@@ -16,40 +16,35 @@ class MyTennisGame: TennisGame {
     }
 
     var score: String? {
-        var score = ""
-        
         if P1point >= 4 && P2point >= 0 && (P1point-P2point) >= 2 {
-            score = "Win for player1"
+            return "Win for player1"
         } else if P2point >= 4 && P1point >= 0 && (P2point-P1point) >= 2 {
-            score = "Win for player2"
+            return "Win for player2"
         } else if P1point == P2point && P1point < 3 {
-            score = scoreMake(point: P1point)
-            score = "\(score)-All"
+            return "\(scoreMake(point: P1point))-All"
         } else if P1point == P2point && P1point > 2 {
-            score = "Deuce"
+            return "Deuce"
         } else if P1point > 0 && P2point == 0 {
             P1res = scoreMake(point: P1point)
             P2res = "Love"
-            score = "\(P1res)-\(P2res)"
+            return "\(P1res)-\(P2res)"
         } else if P2point > 0 && P1point == 0 {
             P2res = scoreMake(point: P2point)
             P1res = "Love"
-            score = "\(P1res)-\(P2res)"
+            return "\(P1res)-\(P2res)"
         } else if P1point>P2point && P1point < 4 {
             P1res = scoreMake(point: P1point)
             P2res = scoreMake(point: P2point)
-            score = "\(P1res)-\(P2res)"
+            return "\(P1res)-\(P2res)"
         } else if P2point>P1point && P2point < 4 {
             P2res = scoreMake(point: P2point)
             P1res = scoreMake(point: P1point)
-            score = "\(P1res)-\(P2res)"
+            return "\(P1res)-\(P2res)"
         } else if P1point > P2point && P2point >= 3 {
-            score = "Advantage player1"
+            return "Advantage player1"
         } else {
-            score = "Advantage player2"
+            return "Advantage player2"
         }
-    
-        return score
     }
     
    private func setP1Score(number: Int) {

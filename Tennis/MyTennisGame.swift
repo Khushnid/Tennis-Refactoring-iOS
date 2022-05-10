@@ -101,14 +101,11 @@ class MyTennisGame: TennisGame {
 // MARK: - Helper Methods
 extension MyTennisGame {
     private func scoreMake(point: Int) -> String {
-        if point == 0 {
-            return "Love"
-        } else if point == 1 {
-            return "Fifteen"
-        } else if point == 2 {
-            return "Thirty"
-        } else {
-            return "Forty"
+        switch point {
+        case 0: return "Love"
+        case 1: return "Fifteen"
+        case 2: return "Thirty"
+        default: return "Forty"
         }
     }
 }

@@ -13,48 +13,38 @@ class MyTennisGame: TennisGame {
         player2Name = player2
     }
     
-    var score: String? {
-        if P1point >= 4 && P1point - P2point >= 2 {
-            return "Win for player1"
-        } else if P2point >= 4 && P2point - P1point >= 2 {
-            return "Win for player2"
-        } else if P1point > P2point && P2point >= 3 {
-            return "Advantage player1"
-        } else if P2point > P1point && P1point >= 3 {
-            return "Advantage player2"
-        } else if P1point == P2point && P1point > 2 {
-            return "Deuce"
-        } else if P1point == P2point && P1point < 3 {
-            return "\(scoreMake(point: P1point))-All"
-        } else if P1point > 0 && P2point == 0 {
-            return playerScores(scoreMake(point: P1point), nil)
-        } else if P2point > 0 && P1point == 0 {
-            return playerScores(nil, scoreMake(point: P2point))
-        } else if P1point > P2point && P1point < 4 {
-            return playerScores(scoreMake(point: P1point), scoreMake(point: P2point))
-        } else {
-            return playerScores(scoreMake(point: P1point), scoreMake(point: P2point))
-        }
-    }
+    var score: String? { getScore(P1point, P2point) }
 }
 
 extension MyTennisGame {
-    func wonPoint(_ playerName: String) {
-        func P1Score() { P1point += 1 }
-        func P2Score() { P2point += 1 }
-        playerName == "player1" ? P1Score() : P2Score()
+    private func getScore(_ point1: Int, _ point2: Int) -> String {
+        switch (point1, point2) {
+            case let (pt1, pt2) where pt1 >= 4 && pt1 - pt2 >= 2: return "Win for player1"
+            case let (pt1, pt2) where pt2 >= 4 && pt2 - pt1 >= 2: return "Win for player2"
+            case let (pt1, pt2) where pt1 > pt2 && pt2 >= 3: return "Advantage player1"
+            case let (pt1, pt2) where pt2 > pt1 && pt1 >= 3: return "Advantage player2"
+            case let (pt1, pt2) where pt1 == pt2 && pt1 > 2: return "Deuce"
+            case let (pt1, pt2) where pt1 == pt2 && pt1 < 3: return "\(scoreMake(point: pt1))-All"
+            case let (pt1, pt2) where pt1 > 0 && pt2 == 0: return playerScores(scoreMake(point: pt1), nil)
+            case let (pt1, pt2) where pt2 > 0 && pt1 == 0: return playerScores(nil, scoreMake(point: point2))
+            default: return playerScores(scoreMake(point: point1), scoreMake(point: point2))
+        }
     }
     
     private func scoreMake(point: Int) -> String {
         switch point {
-        case 0: return "Love"
-        case 1: return "Fifteen"
-        case 2: return "Thirty"
-        default: return "Forty"
+            case 0: return "Love"
+            case 1: return "Fifteen"
+            case 2: return "Thirty"
+            default: return "Forty"
         }
     }
     
     private func playerScores(_ p1Result: String?, _ p2Result: String?) -> String {
         return "\(p1Result ?? "Love")-\(p2Result ?? "Love")"
+    }
+    
+    func wonPoint(_ playerName: String) {
+        playerName == "player1" ? (P1point += 1) : (P2point += 1)
     }
 }

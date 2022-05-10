@@ -47,15 +47,12 @@ class MyTennisGame: TennisGame {
         }
     }
     
-    private func P1Score() {
-        P1point += 1
-    }
-    
-    private func P2Score() {
-        P2point += 1
-    }
+   
     
     func wonPoint(_ playerName: String) {
+        func P1Score() { P1point += 1 }
+        func P2Score() { P2point += 1 }
+        
         playerName == "player1" ? P1Score() : P2Score()
     }
 }

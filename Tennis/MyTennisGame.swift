@@ -1,4 +1,6 @@
 import Foundation
+import UIKit
+import XCTest
 
 class MyTennisGame: TennisGame {
     private let player1Name: String
@@ -15,100 +17,69 @@ class MyTennisGame: TennisGame {
 
     var score: String? {
         var score = ""
-        if P1point == P2point && P1point < 3
-        {
-            if P1point==0
-            { score = "Love" }
-            if P1point==1
-            { score = "Fifteen" }
-            if P1point==2
-            { score = "Thirty" }
+      
+        if P1point == P2point && P1point < 3 {
+            score = scoreMake(point: P1point)
             score = "\(score)-All"
         }
-        if P1point==P2point && P1point>2
-        { score = "Deuce" }
+      
+        if P1point == P2point && P1point > 2 {
+            score = "Deuce"
+        }
 
-        if P1point > 0 && P2point==0
-        {
-            if (P1point==1)
-            { P1res = "Fifteen" }
-            if (P1point==2)
-            { P1res = "Thirty" }
-            if (P1point==3)
-            { P1res = "Forty" }
-            
+        if P1point > 0 && P2point == 0 {
+            P1res = scoreMake(point: P1point)
             P2res = "Love"
-            score = "\(P1res)-\(P2res)"
-        }
-        if P2point > 0 && P1point==0
-        {
-            if (P2point==1)
-            { P2res = "Fifteen" }
-            if (P2point==2)
-            { P2res = "Thirty" }
-            if (P2point==3)
-            { P2res = "Forty" }
             
+            score = "\(P1res)-\(P2res)"
+        }
+        if P2point > 0 && P1point == 0 {
+            P2res = scoreMake(point: P2point)
             P1res = "Love"
+            
             score = "\(P1res)-\(P2res)"
         }
         
-        if (P1point>P2point && P1point < 4)
-        {
-            if (P1point==2)
-            { P1res="Thirty" }
-            if (P1point==3)
-            { P1res="Forty" }
-            if (P2point==1)
-            { P2res="Fifteen" }
-            if (P2point==2)
-            { P2res="Thirty" }
+        if (P1point>P2point && P1point < 4) {
+            P1res = scoreMake(point: P1point)
+            P2res = scoreMake(point: P2point)
+            
             score = "\(P1res)-\(P2res)"
         }
-        if P2point>P1point && P2point < 4
-        {
-            if (P2point==2)
-            { P2res="Thirty" }
-            if (P2point==3)
-            { P2res="Forty" }
-            if (P1point==1)
-            { P1res="Fifteen" }
-            if (P1point==2)
-            { P1res="Thirty" }
+      
+        if P2point>P1point && P2point < 4 {
+            P2res = scoreMake(point: P2point)
+            P1res = scoreMake(point: P1point)
+        
             score = "\(P1res)-\(P2res)"
         }
         
-        if P1point > P2point && P2point >= 3
-        {
+        if P1point > P2point && P2point >= 3 {
             score = "Advantage player1"
         }
         
-        if P2point > P1point && P1point >= 3
-        {
+        if P2point > P1point && P1point >= 3 {
             score = "Advantage player2"
         }
         
-        if P1point>=4 && P2point>=0 && (P1point-P2point)>=2
-        {
+        if P1point >= 4 && P2point >= 0 && (P1point-P2point)>=2 {
             score = "Win for player1"
         }
-        if P2point>=4 && P1point>=0 && (P2point-P1point)>=2
-        {
+      
+        if P2point >= 4 && P1point >= 0 && (P2point-P1point) >= 2 {
             score = "Win for player2"
         }
+      
         return score
     }
     
    private func setP1Score(number: Int) {
-        
         for _ in 0..<number {
             P1Score()
         }
-        
     }
 
     private func setP2Score(number: Int) {
-        
         for _ in 0..<number {
             P2Score()
         }
@@ -128,6 +99,21 @@ class MyTennisGame: TennisGame {
             P1Score()
         } else {
             P2Score()
+        }
+    }
+}
+
+// MARK: - Helper Methods
+extension MyTennisGame {
+    private func scoreMake(point: Int) -> String {
+        if point == 0 {
+            return "Love"
+        } else if point == 1 {
+            return "Fifteen"
+        } else if point == 2 {
+            return "Thirty"
+        } else {
+            return "Forty"
         }
     }
 }

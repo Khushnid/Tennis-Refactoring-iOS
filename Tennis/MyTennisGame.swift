@@ -39,6 +39,6 @@ class MyTennisGame: TennisGame {
     }
     
     private func playerScores(p1Res: String? = nil, p2Res: String? = nil) -> String {
-        "\(p1Res ?? "Love")-\(p2Res ?? "Love")"
+        "\(p1Res ?? scoreMake(point: 0))-\(p2Res ?? scoreMake(point: 0))"
     }
 }

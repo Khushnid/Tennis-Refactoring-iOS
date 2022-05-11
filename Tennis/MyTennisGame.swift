@@ -1,5 +1,3 @@
-import Foundation
-
 class MyTennisGame: TennisGame {
     private let player1Name: String
     private let player2Name: String
@@ -26,7 +24,7 @@ class MyTennisGame: TennisGame {
         case let (pt1, pt2) where pt1 == pt2 && pt1 > 2: return "Deuce"
         case let (pt1, pt2) where pt1 == pt2 && pt1 < 3: return "\(scoreMake(point: pt1))-All"
         case let (pt1, pt2) where pt1 > 0 && pt2 == 0: return playerScores(p1Res: scoreMake(point: pt1))
-        case let (pt1, pt2) where pt2 > 0 && pt1 == 0: return playerScores(p2Res: scoreMake(point: pt1))
+        case let (pt1, pt2) where pt2 > 0 && pt1 == 0: return playerScores(p2Res: scoreMake(point: pt2))
         default: return playerScores(p1Res: scoreMake(point: P1point), p2Res: scoreMake(point: P2point))
         }
     }

@@ -17,12 +17,8 @@ class MyTennisGame: TennisGame {
         playerName == "player1" ? (P1point += 1) : (P2point += 1)
     }
     
-    var score: String? { getScore(P1point, P2point) }
-}
-
-extension MyTennisGame {
-    private func getScore(_ point1: Int, _ point2: Int) -> String {
-        switch (point1, point2) {
+    var score: String? {
+        switch (P1point, P2point) {
         case let (pt1, pt2) where pt1 >= 4 && pt1 - pt2 >= 2: return "Win for player1"
         case let (pt1, pt2) where pt2 >= 4 && pt2 - pt1 >= 2: return "Win for player2"
         case let (pt1, pt2) where pt1 > pt2 && pt2 >= 3: return "Advantage player1"
@@ -30,11 +26,11 @@ extension MyTennisGame {
         case let (pt1, pt2) where pt1 == pt2 && pt1 > 2: return "Deuce"
         case let (pt1, pt2) where pt1 == pt2 && pt1 < 3: return "\(scoreMake(point: pt1))-All"
         case let (pt1, pt2) where pt1 > 0 && pt2 == 0: return playerScores(p1Res: scoreMake(point: pt1))
-        case let (pt1, pt2) where pt2 > 0 && pt1 == 0: return playerScores(p2Res: scoreMake(point: point2))
-        default: return playerScores(p1Res: scoreMake(point: point1), p2Res: scoreMake(point: point2))
+        case let (pt1, pt2) where pt2 > 0 && pt1 == 0: return playerScores(p2Res: scoreMake(point: pt1))
+        default: return playerScores(p1Res: scoreMake(point: P1point), p2Res: scoreMake(point: P2point))
         }
     }
-    
+
     private func scoreMake(point: Int) -> String {
         switch point {
         case 0: return "Love"

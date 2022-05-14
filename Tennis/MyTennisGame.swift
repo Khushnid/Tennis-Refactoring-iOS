@@ -1,44 +1,47 @@
-class MyTennisGame: TennisGame {
-    private let player1Name: String
-    private let player2Name: String
+import Foundation
+
+final class MyTennisGame: TennisGame {
+  
     private var P1point: Int = 0
     private var P2point: Int = 0
-    private var P1res: String = ""
-    private var P2res: String = ""
-    
-    required init(player1: String, player2: String) {
-        player1Name = player1
-        player2Name = player2
-    }
+
+    required init(player1 p1: String, player2 p2: String) {}
     
     func wonPoint(_ playerName: String) {
         playerName == "player1" ? (P1point += 1) : (P2point += 1)
     }
     
     var score: String? {
-        switch (P1point, P2point) {
-        case let (pt1, pt2) where pt1 >= 4 && pt1 - pt2 >= 2: return "Win for player1"
-        case let (pt1, pt2) where pt2 >= 4 && pt2 - pt1 >= 2: return "Win for player2"
-        case let (pt1, pt2) where pt1 > pt2 && pt2 >= 3: return "Advantage player1"
-        case let (pt1, pt2) where pt2 > pt1 && pt1 >= 3: return "Advantage player2"
-        case let (pt1, pt2) where pt1 == pt2 && pt1 > 2: return "Deuce"
-        case let (pt1, pt2) where pt1 == pt2 && pt1 < 3: return "\(scoreMake(point: pt1))-All"
-        case let (pt1, pt2) where pt1 > 0 && pt2 == 0: return playerScores(p1Res: scoreMake(point: pt1))
-        case let (pt1, pt2) where pt2 > 0 && pt1 == 0: return playerScores(p2Res: scoreMake(point: pt2))
-        default: return playerScores(p1Res: scoreMake(point: P1point), p2Res: scoreMake(point: P2point))
-        }
+        getScore(p1Pts: P1point, p2Pts: P2point)
     }
+}
 
-    private func scoreMake(point: Int) -> String {
-        switch point {
-        case 0: return "Love"
-        case 1: return "Fifteen"
-        case 2: return "Thirty"
-        default: return "Forty"
+extension MyTennisGame {
+    func getScore(p1Pts: Int, p2Pts: Int) -> String {
+        switch true {
+            case p1Pts >= 4 && (p1Pts - p2Pts) >= 2: return "Win for player1"
+            case p2Pts >= 4 && (p2Pts - p1Pts) >= 2: return "Win for player2"
+            case p1Pts > p2Pts && p2Pts >= 3: return "Advantage player1"
+            case p2Pts > p1Pts && p1Pts >= 3: return "Advantage player2"
+            case p1Pts == p2Pts && p1Pts > 2: return "Deuce"
+            case p1Pts == p2Pts: return currentScore(r1: p1Pts, r2: nil)
+            case p1Pts > 0 && p2Pts == 0: return currentScore(r1: p1Pts)
+            case p2Pts > 0 && p1Pts == 0: return currentScore(r2: p2Pts)
+            default: return currentScore(r1: p1Pts, r2: p2Pts)
         }
     }
     
-    private func playerScores(p1Res: String? = nil, p2Res: String? = nil) -> String {
-        "\(p1Res ?? scoreMake(point: 0))-\(p2Res ?? scoreMake(point: 0))"
+    func getScore(for score: Int) -> String {
+        switch score {
+            case 0: return "Love"
+            case 1: return "Fifteen"
+            case 2: return "Thirty"
+            case 3: return "Forty"
+            default: return "All"
+        }
+    }
+    
+    private func currentScore(r1: Int = 0, r2: Int? = 0) -> String {
+        "\(getScore(for: r1))-\(getScore(for: r2 ?? -1))"
     }
 }

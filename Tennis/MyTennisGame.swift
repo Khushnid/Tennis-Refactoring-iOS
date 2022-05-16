@@ -16,19 +16,19 @@ final class MyTennisGame: TennisGame {
             case p2Pts > 3 && p2Pts - p1Pts > 1: return "Win for player2"
             case p2Pts > 2 && p1Pts > p2Pts: return "Advantage player1"
             case p1Pts > 2 && p2Pts > p1Pts: return "Advantage player2"
-            case p1Pts > 0 && p2Pts == 0: return scoreResult(p1: p1Pts)
-            case p2Pts > 0 && p1Pts == 0: return scoreResult(p2: p2Pts)
+            case p1Pts > 0 && p2Pts == 0: return scoreResult(p1Res: p1Pts)
+            case p2Pts > 0 && p1Pts == 0: return scoreResult(p2Res: p2Pts)
             case p1Pts == p2Pts: return valueWhenPlayerPointsAreEqual
-            default: return scoreResult(p1: p1Pts, p2: p2Pts)
+            default: return scoreResult(p1Res: p1Pts, p2Res: p2Pts)
         }
     }
     
     var valueWhenPlayerPointsAreEqual: String {
-        return (p1Pts > 2) ? "Deuce" : scoreResult(p1: p1Pts, p2: nil)
+        return (p1Pts > 2) ? "Deuce" : scoreResult(p1Res: p1Pts, p2Res: nil)
     }
     
-    private func scoreResult(p1: Int = 0, p2: Int? = 0) -> String {
-        return "\(getPoint(for: p1))-\(getPoint(for: p2 ?? -1))"
+    private func scoreResult(p1Res: Int = 0, p2Res: Int? = 0) -> String {
+        return "\(getPoint(for: p1Res))-\(getPoint(for: p2Res ?? -1))"
     }
     
     private func getPoint(for score: Int) -> String {

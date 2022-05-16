@@ -24,11 +24,11 @@ final class MyTennisGame: TennisGame {
     }
     
     var valueWhenPlayerPointsAreEqual: String {
-        return (p1Pts > 2) ? "Deuce" : scoreResult(p1Res: p1Pts, p2Res: nil)
+        return (p1Pts > 2) ? "Deuce" : "\(getPoint(for: p1Pts))-All"
     }
     
-    private func scoreResult(p1Res: Int = 0, p2Res: Int? = 0) -> String {
-        return "\(getPoint(for: p1Res))-\(getPoint(for: p2Res ?? -1))"
+    private func scoreResult(p1Res: Int = 0, p2Res: Int = 0) -> String {
+        return "\(getPoint(for: p1Res))-\(getPoint(for: p2Res))"
     }
     
     private func getPoint(for score: Int) -> String {
@@ -36,8 +36,7 @@ final class MyTennisGame: TennisGame {
             case 0: return "Love"
             case 1: return "Fifteen"
             case 2: return "Thirty"
-            case 3: return "Forty"
-            default: return "All"
+            default: return "Forty"
         }
     }
 }
